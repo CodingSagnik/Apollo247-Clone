@@ -145,9 +145,6 @@ The frontend application will be available at http://localhost:3000
   - `minFee`: Minimum consultation fee
   - `maxFee`: Maximum consultation fee
 
-## Developer
-
-Made by Sagnik Ray for Andaz Kumar's Full Stack Development internship.
 
 ## Future Improvements
 - User authentication and authorization
@@ -161,8 +158,8 @@ Made by Sagnik Ray for Andaz Kumar's Full Stack Development internship.
 This project can be deployed on Vercel, Netlify, or any other platform that supports Next.js applications.
 
 ## Screenshots
-
-(Screenshots will be added after deployment)
+![image](https://github.com/user-attachments/assets/fef81649-2c3b-4df3-a19b-744c49c4134c)
+![image](https://github.com/user-attachments/assets/f5121881-3a1d-4afd-9716-bdd8a2dd0cd9)
 
 ## License
 
