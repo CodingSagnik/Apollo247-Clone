@@ -1,0 +1,43 @@
+/* Basic reset and global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Define the color palette according to specs */
+:root {
+  --apollo-dark: #0B0809; /* Background dark color */
+  --apollo-grey: #333333; /* Grey text color */
+  --apollo-blue: #3643FB; /* Primary button color */
+  --apollo-light: #F5F5F5; /* Light text/background color */
+}
+
+/* System font stack that resembles Mont */
+body, html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--apollo-dark);
+  background-color: #F5F5F5;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+p, span, div, a, button, input, select, textarea {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+@media (max-width: 393px) {
+  /* Specific styles for 393px width devices as per requirements */
+  .container {
+    max-width: 393px;
+    width: 100%;
+  }
+}

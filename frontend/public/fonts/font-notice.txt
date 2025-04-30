@@ -1,0 +1,8 @@
+These are placeholder files for the Mont font.
+In a production environment, you would need to purchase or license the Mont font legally.
+For the purpose of this internship project, we're using placeholders.
+
+The actual Mont font can be purchased from:
+https://www.myfonts.com/fonts/font-fabric/mont/
+
+You can replace these placeholder files with the actual licensed font files when needed.
