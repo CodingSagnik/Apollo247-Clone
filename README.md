@@ -7,6 +7,12 @@ This project is a clone of the Apollo247 doctor listing page, focusing specifica
 - **Frontend**: [https://apollo247-clone.onrender.com](https://apollo247-clone.onrender.com)
 - **Backend API**: [https://apollo-clone-api.onrender.com](https://apollo-clone-api.onrender.com)
 
+
+## Screenshots
+![image](https://github.com/user-attachments/assets/46112c6a-7848-4a66-b0a1-fe9c4b212f19)
+![image](https://github.com/user-attachments/assets/dd5b8af0-072d-4add-a9a4-be1b54eb1c9c)
+
+
 ## Project Structure
 
 ```
@@ -181,14 +187,4 @@ This project is deployed on Render:
 4. Set publish directory to `frontend/out`
 5. Configured API base URL as an environment variable
 
-## Screenshots
-![image](https://github.com/user-attachments/assets/fef81649-2c3b-4df3-a19b-744c49c4134c)
-![image](https://github.com/user-attachments/assets/f5121881-3a1d-4afd-9716-bdd8a2dd0cd9)
 
-## Attribution
-
-This project was created by Sagnik Ray for Andaz Kumar's Full Stack Development internship assignment.
-
-## License
-
-This project is for demonstration purposes only. All rights to the original Apollo247 design belong to their respective owners.
