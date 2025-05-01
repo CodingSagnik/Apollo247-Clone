@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: apollo-clone-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: .next
+    envVars:
+      - key: NEXT_PUBLIC_API_BASE_URL
+        fromService:
+          type: web
+          name: apollo-clone-api
+          envVarKey: RENDER_EXTERNAL_URL
