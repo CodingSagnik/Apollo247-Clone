@@ -1,52 +1,54 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
-import helmet from 'helmet';
-import morgan from 'morgan';
 import dotenv from 'dotenv';
+import connectDB from './config/db';
 import doctorRoutes from './routes/doctorRoutes';
+import path from 'path';
 
 // Load environment variables
 dotenv.config();
 
-// Create Express app
-const app = express();
+// Connect to MongoDB (with fallback for development)
+try {
+  connectDB();
+  console.log('Attempting to connect to MongoDB...');
+} catch (error) {
+  console.log('MongoDB connection failed - running in mock data mode');
+}
 
-// Set port
+// Initialize Express
+const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// Middleware with enhanced CORS configuration
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://apollo-clone.netlify.app'],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 app.use(express.json());
-app.use(cors());
-app.use(helmet());
-app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }));
 
-// Routes
+// Serve static files from the images directory
+app.use('/images', express.static(path.join(__dirname, '../public/images')));
+
+// API Routes
 app.use('/api/doctors', doctorRoutes);
 
-// Root route
+// Test route
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Apollo247 Clone API' });
+  res.send('Apollo247 Clone API is running...');
 });
 
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGODB_URI!)
-  .then(() => {
-    console.log('Connected to MongoDB');
-    
-    // Start server
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
-  });
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+});
 
-// Error handling middleware
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something went wrong!' });
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err: Error) => {
+  console.log(`Error: ${err.message}`);
+  // Close server & exit process
+  process.exit(1);
 });

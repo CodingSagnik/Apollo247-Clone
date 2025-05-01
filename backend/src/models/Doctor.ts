@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
+// Doctor document interface
 export interface IDoctor extends Document {
   name: string;
   specialty: string;
@@ -17,6 +18,7 @@ export interface IDoctor extends Document {
   updatedAt: Date;
 }
 
+// Doctor schema
 const DoctorSchema = new Schema<IDoctor>(
   {
     name: { type: String, required: true },
@@ -35,4 +37,7 @@ const DoctorSchema = new Schema<IDoctor>(
   { timestamps: true }
 );
 
-export default mongoose.model<IDoctor>('Doctor', DoctorSchema);
+// Create and export the Doctor model
+const Doctor = mongoose.model<IDoctor>('Doctor', DoctorSchema);
+
+export default Doctor;

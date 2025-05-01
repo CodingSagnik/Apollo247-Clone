@@ -1,54 +1,9 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import Doctor from '../models/Doctor';
+import connectDB from './db';
 
-// Load environment variables
-dotenv.config();
-
-// Sample doctor data
-const doctors = [
-  {
-    name: 'Dr. Rajesh Kumar',
-    specialty: 'General Physician',
-    experience: 15,
-    qualification: 'MBBS, MD',
-    hospital: 'Apollo Hospital',
-    location: 'Delhi',
-    languages: ['English', 'Hindi'],
-    availability: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    rating: 4.8,
-    consultationFee: 800,
-    imageUrl: 'https://example.com/doctor1.jpg',
-    gender: 'male'
-  },
-  {
-    name: 'Dr. Priya Sharma',
-    specialty: 'General Physician',
-    experience: 10,
-    qualification: 'MBBS, DNB',
-    hospital: 'Apollo Clinic',
-    location: 'Mumbai',
-    languages: ['English', 'Hindi', 'Marathi'],
-    availability: ['Monday', 'Wednesday', 'Friday'],
-    rating: 4.7,
-    consultationFee: 750,
-    imageUrl: 'https://example.com/doctor2.jpg',
-    gender: 'female'
-  },
-  {
-    name: 'Dr. Anand Patel',
-    specialty: 'General Physician',
-    experience: 20,
-    qualification: 'MBBS, MD (Internal Medicine)',
-    hospital: 'Apollo Health City',
-    location: 'Hyderabad',
-    languages: ['English', 'Hindi', 'Telugu'],
-    availability: ['Tuesday', 'Thursday', 'Saturday'],
-    rating: 4.9,
-    consultationFee: 1000,
-    imageUrl: 'https://example.com/doctor3.jpg',
-    gender: 'male'
-  },
+// Sample doctor data for seeding the database
+const doctorData = [
   {
     name: 'Dr. Sunita Reddy',
     specialty: 'General Physician',
@@ -60,8 +15,8 @@ const doctors = [
     availability: ['Monday', 'Tuesday', 'Thursday', 'Saturday'],
     rating: 4.6,
     consultationFee: 850,
-    imageUrl: 'https://example.com/doctor4.jpg',
-    gender: 'female'
+    imageUrl: '/images/doctors/female-doctor-1.jpg',
+    gender: 'female',
   },
   {
     name: 'Dr. Vikram Singh',
@@ -74,77 +29,92 @@ const doctors = [
     availability: ['Wednesday', 'Friday', 'Saturday'],
     rating: 4.5,
     consultationFee: 700,
-    imageUrl: 'https://example.com/doctor5.jpg',
-    gender: 'male'
+    imageUrl: '/images/doctors/male-doctor-1.jpg',
+    gender: 'male',
   },
   {
-    name: 'Dr. Meena Gupta',
+    name: 'Dr. Anjali Mehta',
     specialty: 'General Physician',
     experience: 15,
     qualification: 'MBBS, MD (Internal Medicine)',
-    hospital: 'Apollo Hospital',
-    location: 'Kolkata',
-    languages: ['English', 'Bengali', 'Hindi'],
+    hospital: 'Apollo Hospitals',
+    location: 'Delhi',
+    languages: ['English', 'Hindi', 'Punjabi'],
     availability: ['Monday', 'Wednesday', 'Friday'],
     rating: 4.8,
-    consultationFee: 850,
-    imageUrl: 'https://example.com/doctor6.jpg',
-    gender: 'female'
+    consultationFee: 950,
+    imageUrl: '/images/doctors/female-doctor-2.jpg',
+    gender: 'female',
+  },
+  {
+    name: 'Dr. Ramesh Kumar',
+    specialty: 'General Physician',
+    experience: 10,
+    qualification: 'MBBS, DNB (General Medicine)',
+    hospital: 'Apollo Clinics',
+    location: 'Hyderabad',
+    languages: ['English', 'Telugu', 'Hindi'],
+    availability: ['Tuesday', 'Thursday', 'Saturday', 'Sunday'],
+    rating: 4.3,
+    consultationFee: 800,
+    imageUrl: '/images/doctors/male-doctor-2.jpg',
+    gender: 'male',
+  },
+  {
+    name: 'Dr. Preeti Sharma',
+    specialty: 'General Physician',
+    experience: 7,
+    qualification: 'MBBS, Diploma in Family Medicine',
+    hospital: 'Apollo Medical Centre',
+    location: 'Mumbai',
+    languages: ['English', 'Marathi', 'Hindi'],
+    availability: ['Monday', 'Wednesday', 'Friday', 'Saturday'],
+    rating: 4.4,
+    consultationFee: 750,
+    imageUrl: '/images/doctors/female-doctor-3.jpg',
+    gender: 'female',
   },
   {
     name: 'Dr. Arjun Nair',
     specialty: 'General Physician',
-    experience: 6,
-    qualification: 'MBBS, DNB',
-    hospital: 'Apollo Clinic',
-    location: 'Pune',
-    languages: ['English', 'Marathi', 'Hindi'],
-    availability: ['Tuesday', 'Thursday', 'Saturday'],
-    rating: 4.4,
-    consultationFee: 650,
-    imageUrl: 'https://example.com/doctor7.jpg',
-    gender: 'male'
-  },
-  {
-    name: 'Dr. Kavita Patel',
-    specialty: 'General Physician',
-    experience: 18,
-    qualification: 'MBBS, MD, FCCP',
-    hospital: 'Apollo Hospital',
-    location: 'Ahmedabad',
-    languages: ['English', 'Gujarati', 'Hindi'],
-    availability: ['Monday', 'Thursday', 'Friday'],
-    rating: 4.9,
-    consultationFee: 950,
-    imageUrl: 'https://example.com/doctor8.jpg',
-    gender: 'female'
+    experience: 9,
+    qualification: 'MBBS, MD (General Medicine)',
+    hospital: 'Apollo Spectra',
+    location: 'Bangalore',
+    languages: ['English', 'Malayalam', 'Kannada'],
+    availability: ['Tuesday', 'Thursday', 'Sunday'],
+    rating: 4.7,
+    consultationFee: 900,
+    imageUrl: '/images/doctors/male-doctor-3.jpg',
+    gender: 'male',
   }
 ];
 
-// Connect to MongoDB and seed data
-const seedDatabase = async () => {
+// Function to seed the database
+const seedDatabase = async (): Promise<void> => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI!);
-    console.log('Connected to MongoDB');
+    // Connect to MongoDB
+    await connectDB();
     
     // Clear existing data
     await Doctor.deleteMany({});
-    console.log('Existing doctors deleted');
+    console.log('Existing doctors data cleared');
     
-    // Insert new data
-    await Doctor.insertMany(doctors);
-    console.log('Sample doctors added successfully');
+    // Insert new doctor data
+    await Doctor.insertMany(doctorData);
+    console.log('Database seeded successfully with sample doctors');
     
-    // Disconnect from MongoDB
-    await mongoose.disconnect();
-    console.log('Disconnected from MongoDB');
-    
-    process.exit(0);
+    mongoose.disconnect();
+    console.log('MongoDB disconnected after seeding');
   } catch (error) {
-    console.error('Error seeding database:', error);
+    console.error(`Error seeding database: ${error instanceof Error ? error.message : 'Unknown error'}`);
     process.exit(1);
   }
 };
 
 // Run the seeder
-seedDatabase();
+if (require.main === module) {
+  seedDatabase();
+}
+
+export default seedDatabase;
