@@ -2,6 +2,11 @@
 
 This project is a clone of the Apollo247 doctor listing page, focusing specifically on the General Physician specialty page. It includes both frontend and backend components, with full filtering capabilities and REST API implementation.
 
+## Live Demo
+
+- **Frontend**: [https://apollo247-clone.onrender.com](https://apollo247-clone.onrender.com)
+- **Backend API**: [https://apollo-clone-api.onrender.com](https://apollo-clone-api.onrender.com)
+
 ## Project Structure
 
 ```
@@ -155,11 +160,34 @@ The frontend application will be available at http://localhost:3000
 
 ## Deployment
 
-This project can be deployed on Vercel, Netlify, or any other platform that supports Next.js applications.
+This project is deployed on Render:
+
+### Live Deployment URLs
+- **Frontend**: [https://apollo247-clone.onrender.com](https://apollo247-clone.onrender.com)
+- **Backend API**: [https://apollo-clone-api.onrender.com](https://apollo-clone-api.onrender.com)
+
+### Deployment Process
+
+#### Backend Deployment
+1. Created a Web Service on Render
+2. Connected to GitHub repository (backend directory)
+3. Configured environment variables (MongoDB URI, Node environment, Port)
+4. Used Node.js environment with TypeScript build process
+
+#### Frontend Deployment
+1. Created a Static Site on Render
+2. Connected to GitHub repository (frontend directory)
+3. Set build command to `npm install && npm run build`
+4. Set publish directory to `frontend/out`
+5. Configured API base URL as an environment variable
 
 ## Screenshots
 ![image](https://github.com/user-attachments/assets/fef81649-2c3b-4df3-a19b-744c49c4134c)
 ![image](https://github.com/user-attachments/assets/f5121881-3a1d-4afd-9716-bdd8a2dd0cd9)
+
+## Attribution
+
+This project was created by Sagnik Ray for Andaz Kumar's Full Stack Development internship assignment.
 
 ## License
 
