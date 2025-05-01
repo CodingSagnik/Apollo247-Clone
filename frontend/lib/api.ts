@@ -80,11 +80,16 @@ export const getDoctors = async (
     const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 second timeout
     
     try {
+      console.log(`Fetching from: ${API_BASE_URL}/api/doctors?${queryParams}`);
       const response = await fetch(`${API_BASE_URL}/api/doctors?${queryParams}`, {
         signal: controller.signal,
+        method: 'GET',
         headers: {
-          'Accept': 'application/json'
-        }
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Origin': window.location.origin
+        },
+        mode: 'cors'
       });
       
       clearTimeout(timeoutId);
