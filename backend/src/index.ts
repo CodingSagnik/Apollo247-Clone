@@ -22,8 +22,8 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware with enhanced CORS configuration
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://apollo-clone.netlify.app'],
-  methods: ['GET', 'POST'],
+  origin: '*', // Allow requests from any origin in development/testing
+  methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
